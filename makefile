@@ -1,6 +1,6 @@
 HEADFILES = maxPathSum.h 
 
-main.out : main.o 
+a.out : main.o 
 	g++ -o main.out  main.o
 
 main.o : main.cpp $(HEADFILES)
