@@ -4,7 +4,7 @@
 #include <queue>
 
 #include "maxPathSum.h"
-
+#include "twoSum.h"
 using namespace std;
 
 
@@ -17,7 +17,7 @@ struct ListNode
 
 int main()
 {
-	maxPathSum::Solution test;
+	twoSum::Solution test;
 	test.test();
 	std::cout<<"End"<<std::endl;
 	return 0;
