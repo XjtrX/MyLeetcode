@@ -17,7 +17,7 @@ struct ListNode
 
 int main()
 {
-	twoSum::Solution test;
+	maxPathSum::Solution test;
 	test.test();
 	std::cout<<"End"<<std::endl;
 	return 0;

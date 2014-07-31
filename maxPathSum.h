@@ -56,6 +56,32 @@ return
     		{
     			return res;
     		}
+
+    		vector<int > path;
+    		path.clear();
+    		//path.psuh_back(root->val);
+    		checkSum(root, sum, path, res);
+    		return res;
+    	}
+
+    	void checkSum(TreeNode * root, int sum, vector<int> & path, vector<vector<int> > &res)
+    	{
+    		if (root == NULL)
+    		{
+    			//path.pop_back();
+    			return ;
+    		}
+    		if (root-> left == NULL && root->right == NULL && sum == root->val)
+    		{
+    			path.push_back(root->val);
+    			res.push_back(path);
+    			path.pop_back();
+    			return ;
+    		}
+    		path.push_back(root->val);
+    		checkSum(root->left, sum - root->val, path, res);
+    		checkSum(root->right, sum - root->val, path, res);
+    		path.pop_back();
     	}
 /*
 Given a binary tree, find the maximum path sum.
@@ -154,10 +180,26 @@ Return 6.
 		cur = cur->left;
 		cur->right  = new TreeNode(-11);
 		cur->left = new TreeNode(22);
-
+		cur = root->right;
+		cur->left = new TreeNode(42);
+		cur->right = new TreeNode(43);
+		cur = cur->right;
+		cur->left = new TreeNode(-1);
 
 
 		cout<<maxPathSum(root)<<endl;
+
+		cout<<"-----------------------"<<endl;
+		vector< vector<int> > res;
+		res = pathSum(root, 131);
+		for(vector<vector<int> >::iterator itr = res.begin(); itr != res.end(); ++itr){
+			for (vector<int>::iterator i = itr->begin(); i !=  itr->end(); ++i)
+			{
+				cout<<*i<<",";
+			}
+			cout<<endl;
+		}
+
 	}
 };
 
