@@ -58,7 +58,9 @@ namespace FourSum{
             				right--;
 
             		}
+            		while(num[j] == num[j+1]) j++;
             	}
+	while(num[i] == num[i+1]) i++;
             }
             return res;
         }
@@ -66,7 +68,18 @@ namespace FourSum{
         //------------------
         void test(){
             vector<int> test = {1,3,6,7,1,2,33,68,32,12,9,0,0,4,2,-2,-6,-23};
-            int target = 16;
+            int n = 20;
+            while(n--) test.push_back(rand()%50);
+            n = 20;
+            while(n--) test.push_back(0 - rand()%50);
+            for (int i = 0; i < test.size(); ++i)
+            {
+            	cout<<test[i]<<", ";
+            }
+            cout<<endl;
+            int target = 34;
+            cout<<target<<endl<<"-----"<<endl;
+            
             vector<vector<int> > res = fourSum(test, target);
             for (vector<vector<int> >::iterator  i = res.begin(); i !=  res.end(); ++i)
             {
