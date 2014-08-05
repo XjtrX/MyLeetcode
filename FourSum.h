@@ -35,33 +35,58 @@ namespace FourSum{
                 return res;
             }
             sort(num.begin(), num.end());
+
+            map<int, vector<pair<int,int> >  >  lastTwo;
             int count = num.size();
-            for (int i = 0; i < count - 3; ++i)
+
+            bool flag = false;
+            for (int i = 0; i < count - 1; ++i)
             {
             	for (int j = 0; j < count - 2; ++j)
             	{
-            		int sum = num[i] + num[j];
-            		int left = j + 1, right = count -1;
-            		while(right > left)
+            		lastTwo[num[i] + num[j]].push_back(pair<int,int>(i, j));
+            		if (num[j] == num[j+1]) 
             		{
-            			if (sum + num[right] + num[left] == target)
-            			{
-            				std::vector<int> v;
-            				v.push_back(num[i]); v.push_back(num[j]);
-            				v.push_back(num[left]); v.push_back(num[right]);
-            				res.push_back(v);
-            				while(num[left] == num[left + 1]) left++;
-            				while(num[right] == num[right - 1] )right--;;
-            			}
-            			if(sum + num[left] + num[right] < target) left++;
-            			else
-            				right--;
-
+            		while(num[j] == num[j+1]) ++j;
+            		--j;
             		}
-            		while(num[j] == num[j+1]) j++;
+
             	}
-	while(num[i] == num[i+1]) i++;
+            	if (num[i] == num[i+1])
+            	{
+            		while(num[i] == num[i + 1] ) ++i;
+            		--i;
+            	}
             }
+            
+            for (int i = 0; i < count ; ++i)
+            {
+            	for (int j = i + 1; j < count ; ++j)
+            	{
+            		int sum = num[i] + num[j];
+            		int rest = target - sum;
+            		if(lastTwo.find(rest) == lastTwo.end()) continue;
+            		vector<pair<int,int> > & tem = lastTwo[rest];
+            		for (int k = 0; k < tem.size() ; ++k )
+            		{
+            			if (i <= tem[k].second) continue;
+            			res.push_back({num[tem[k].first],num[tem[k].second], num[i], num[j]});
+            		}
+
+            		if (num[j] == num[j+1]) 
+            		{
+            		while(num[j] == num[j+1]) ++j;
+            		--j;
+            		}
+            	}
+            	if (num[i] == num[i+1])
+            	{
+            		while(num[i] == num[i + 1] && i < j) ++i;
+            		--i;
+            	}
+            }
+           // sort(res.begin(), res.end());
+            //res.erase(unique(res.begin(),res.end(), res.end()));
             return res;
         }
 
