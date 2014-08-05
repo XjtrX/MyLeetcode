@@ -32,18 +32,47 @@ namespace FourSum{
             res.clear();
             if (num.size() < 4)
             {
-                r eturn res;
+                return res;
             }
             sort(num.begin(), num.end());
+            int count = num.size();
+            for (int i = 0; i < count - 3; ++i)
+            {
+            	for (int j = 0; j < count - 2; ++j)
+            	{
+            		int sum = num[i] + num[j];
+            		int left = j + 1, right = count -1;
+            		while(right > left)
+            		{
+            			if (sum + num[right] + num[left] == target)
+            			{
+            				std::vector<int> v;
+            				v.push_back(num[i]); v.push_back(num[j]);
+            				v.push_back(num[left]); v.push_back(num[right]);
+            				res.push_back(v);
+            				while(num[left] == num[left + 1]) left++;
+            				while(num[right] == num[right - 1] )right--;;
+            			}
+            			if(sum + num[left] + num[right] < target) left++;
+            			else
+            				right--;
 
+            		}
+            	}
+            }
+            return res;
         }
+
+        //------------------
         void test(){
             vector<int> test = {1,3,6,7,1,2,33,68,32,12,9,0,0,4,2,-2,-6,-23};
             int target = 16;
             vector<vector<int> > res = fourSum(test, target);
-            for (vector<vector<int> >  i = res.begin(); i !=  res.end(); ++i)
+            for (vector<vector<int> >::iterator  i = res.begin(); i !=  res.end(); ++i)
             {
-                /* code */
+                for(vector<int>::iterator j = i->begin(); j != i->end(); ++j)
+                	cout<<*j<<",";
+                cout<<endl;
             }
         }
     };
