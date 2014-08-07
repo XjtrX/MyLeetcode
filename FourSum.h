@@ -81,7 +81,7 @@ namespace FourSum{
             	}
             	if (num[i] == num[i+1])
             	{
-            		while(num[i] == num[i + 1] && i < j) ++i;
+            		while(num[i] == num[i + 1]) ++i;
             		--i;
             	}
             }
