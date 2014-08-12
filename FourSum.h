@@ -32,18 +32,85 @@ namespace FourSum{
             res.clear();
             if (num.size() < 4)
             {
-                r eturn res;
+                return res;
             }
             sort(num.begin(), num.end());
 
+            map<int, vector<pair<int,int> >  >  lastTwo;
+            int count = num.size();
+
+            bool flag = false;
+            for (int i = 0; i < count - 1; ++i)
+            {
+            	for (int j = 0; j < count - 2; ++j)
+            	{
+            		lastTwo[num[i] + num[j]].push_back(pair<int,int>(i, j));
+            		if (num[j] == num[j+1]) 
+            		{
+            		while(num[j] == num[j+1]) ++j;
+            		--j;
+            		}
+
+            	}
+            	if (num[i] == num[i+1])
+            	{
+            		while(num[i] == num[i + 1] ) ++i;
+            		--i;
+            	}
+            }
+            
+            for (int i = 0; i < count ; ++i)
+            {
+            	for (int j = i + 1; j < count ; ++j)
+            	{
+            		int sum = num[i] + num[j];
+            		int rest = target - sum;
+            		if(lastTwo.find(rest) == lastTwo.end()) continue;
+            		vector<pair<int,int> > & tem = lastTwo[rest];
+            		for (int k = 0; k < tem.size() ; ++k )
+            		{
+            			if (i <= tem[k].second) continue;
+            			res.push_back({num[tem[k].first],num[tem[k].second], num[i], num[j]});
+            		}
+
+            		if (num[j] == num[j+1]) 
+            		{
+            		while(num[j] == num[j+1]) ++j;
+            		--j;
+            		}
+            	}
+            	if (num[i] == num[i+1])
+            	{
+            		while(num[i] == num[i + 1]) ++i;
+            		--i;
+            	}
+            }
+           // sort(res.begin(), res.end());
+            //res.erase(unique(res.begin(),res.end(), res.end()));
+            return res;
         }
+
+        //------------------
         void test(){
             vector<int> test = {1,3,6,7,1,2,33,68,32,12,9,0,0,4,2,-2,-6,-23};
-            int target = 16;
-            vector<vector<int> > res = fourSum(test, target);
-            for (vector<vector<int> >  i = res.begin(); i !=  res.end(); ++i)
+            int n = 20;
+            while(n--) test.push_back(rand()%50);
+            n = 20;
+            while(n--) test.push_back(0 - rand()%50);
+            for (int i = 0; i < test.size(); ++i)
             {
-                /* code */
+            	cout<<test[i]<<", ";
+            }
+            cout<<endl;
+            int target = 34;
+            cout<<target<<endl<<"-----"<<endl;
+            
+            vector<vector<int> > res = fourSum(test, target);
+            for (vector<vector<int> >::iterator  i = res.begin(); i !=  res.end(); ++i)
+            {
+                for(vector<int>::iterator j = i->begin(); j != i->end(); ++j)
+                	cout<<*j<<",";
+                cout<<endl;
             }
         }
     };
