@@ -11,17 +11,20 @@ The brackets must close in the correct order, "()" and "()[]{}" are all valid bu
 #include <vector>
 #include <string>
 #include <stack>
-
+#include <map>
 using namespace std;
 
-bool isVaild(string s)
+bool isValid(string s)
 {
 	bool res = true;
 	if (s.size()<2)
 	{
 		return false;
 	}
-
+	map<char,char> mp;
+	mp['('] = ')';
+	mp['{'] = '}';
+	mp['['] = ']';
 	stack<char> St;
 	int len = s.size();
 	int k = 0;
@@ -33,7 +36,7 @@ bool isVaild(string s)
 		}
 		else
 		{
-			if (s[k] == St.top())
+			if (!St.empty() && s[k] == mp[St.top()])
 			{
 				k++;
 				St.pop();
@@ -44,20 +47,15 @@ bool isVaild(string s)
 			}
 		}
 
-	}while(k < len && !St.empty());
-
-	if (k<len || !St.empty())
-	{
-		return false;
-	}
+	}while(k < len || !St.empty());
 	return res;
 }
 
 int main()
 {
-	string s = "()";
+	string s = "()[]{}{";
 
-	cout<<"\""<<s<<"\""<<(isVaild(s)?" is Valid.":" is not valid.")<<endl;
+	cout<<"\""<<s<<"\""<<(isValid(s)?" is Valid.":" is not valid.")<<endl;
 
 	return 0;
 }
