@@ -62,7 +62,7 @@ vector<int> searchRange(int A[], int n, int target)
 					right = tem - 1;
 				}
 				else
-					mid_right = tem ;
+				mid_right = tem ;
 				if (right == mid_right)
 				{
 					res[1] = mid_right;
