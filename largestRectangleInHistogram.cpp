@@ -142,7 +142,7 @@ int largestRectangleArea(vector<int> & height)
 
 int main(int argc, char const *argv[])
 {
-	std::vector<int> height = {2,2,2,2,2,2,4};
+	std::vector<int> height = {2,2,2,2,2,2,};
 		for (std::vector<int>::iterator itr = height.begin(); itr != height.end(); ++itr)
 	{
 		cout<<*itr<<", ";
