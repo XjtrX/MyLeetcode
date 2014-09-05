@@ -91,7 +91,7 @@ string simplifyPath(string path)
 
 int main(int argc, char const *argv[])
 {
-	string path = "/../";
+	string path = "./";
 	cout<<path<<endl;
 	cout<<simplifyPath(path)<<endl;
 	return 0;
