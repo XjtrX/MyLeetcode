@@ -15,6 +15,7 @@ define the normal struct and functions.
 #include <set>
 #include <algorithm>
 #include <sstream>
+#include <unordered_set>
 
 using namespace std;
 
