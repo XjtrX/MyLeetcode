@@ -72,4 +72,15 @@ void delList(ListNode * head)
 		delete tem;
 	}
 }
+
+
+//treenode
+struct TreeNode
+{
+	int val;
+	TreeNode * left;
+	TreeNode * right;
+	TreeNode(int x):val(x), left(NULL), right(NULL){}
+};
+
 #endif
